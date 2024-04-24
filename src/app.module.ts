@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { EventsModule } from './events/events.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { RedisService } from './cache/redis.service';
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import { AppService } from './app.service';
     EventsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RedisService],
 })
 export class AppModule {}

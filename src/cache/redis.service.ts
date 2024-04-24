@@ -99,6 +99,10 @@ export class RedisService {
     return this.cluster.del(key);
   }
 
+  async deleteMany(key: string[]) {
+    return this.cluster.del(...key);
+  }
+
   async getdel(key: string) {
     return this.cluster.getdel(key);
   }

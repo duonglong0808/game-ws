@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { UpdateStatusGameDto, DataSendUpdatePointDto } from './events/dto/interface.dto';
 
@@ -14,5 +14,10 @@ export class AppController {
   @Post('user/point')
   upPointByUser(@Body() dto: DataSendUpdatePointDto) {
     return this.appService.updatePointUser(dto);
+  }
+
+  @Get('redis')
+  deleteRedis(@Query('key') key: string, @Query('c') c: string) {
+    return this.appService.deleteKeyRedis(key, +c);
   }
 }
