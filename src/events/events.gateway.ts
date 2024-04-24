@@ -3,7 +3,7 @@ import { BeforeApplicationShutdown } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { Server, Socket } from 'socket.io';
 import { EventService } from './event.service';
-import { DataJoinRoom, DataSendMessage, UpdateStatusGameDto } from './dto/interface.dto';
+import { DataJoinRoom, DataSendMessage, DataSendUpdatePointDto, UpdatePointDto, UpdateStatusGameDto } from './dto/interface.dto';
 import { TypeEmitMessage } from 'src/constants';
 
 @WebSocketGateway({
@@ -50,11 +50,24 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
 
   updateStatusGameDice(dto: UpdateStatusGameDto) {
     const dataRes = this.bufferObject({
-      type: TypeEmitMessage.updateStatusDice,
+      typeEmit: TypeEmitMessage.updateStatusDice,
       ...dto,
     });
 
     this.server.emit('data', dataRes);
+  }
+
+  updatePointUser(dto: DataSendUpdatePointDto) {
+    dto.data.map((data) => {
+      const roomName = `room_game-${data.userId}`;
+
+      const dataSend = this.bufferObject({
+        typeEmit: TypeEmitMessage.updatePoint,
+        ...data,
+      });
+
+      this.server.to(roomName).emit('data', dataSend);
+    });
   }
 
   @SubscribeMessage('leave-room')

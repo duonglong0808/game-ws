@@ -19,3 +19,13 @@ export interface UpdateStatusGameDto {
   gameDiceId: number;
   status: number;
 }
+
+export interface UpdatePointDto {
+  userId: number;
+  type: number;
+  points: number;
+}
+
+export interface DataSendUpdatePointDto {
+  data: UpdatePointDto[];
+}

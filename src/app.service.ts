@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { EventsGateway } from './events/events.gateway';
-import { UpdateStatusGameDto } from './events/dto/interface.dto';
+import { DataSendUpdatePointDto, UpdateStatusGameDto } from './events/dto/interface.dto';
 
 @Injectable()
 export class AppService {
@@ -8,5 +8,9 @@ export class AppService {
 
   async updateStatusGameDice(dto: UpdateStatusGameDto) {
     return this.eventsGateway.updateStatusGameDice(dto);
+  }
+
+  async updatePointUser(dto: DataSendUpdatePointDto) {
+    return this.eventsGateway.updatePointUser(dto);
   }
 }

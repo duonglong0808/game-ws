@@ -106,13 +106,14 @@ export class EventService {
     });
 
     const dataRes = this.bufferObject({
-      type: TypeEmitMessage.join,
+      typeEmit: TypeEmitMessage.join,
       roomName: roomName,
       userId,
       dataDiceDetail,
     });
 
     // Ping data user
+    client.join(roomName);
     return client.emit('data', dataRes);
   }
 }
