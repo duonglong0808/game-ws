@@ -100,7 +100,8 @@ export class EventService {
       const key = keyRedis[index];
       return {
         gameDiceId: key?.split(':')[1],
-        transaction: key?.split(':')[2],
+        diceDetailId: key?.split(':')[2],
+        transaction: key?.split(':')[3],
         status: data,
       };
     });

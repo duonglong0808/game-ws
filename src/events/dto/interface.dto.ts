@@ -17,6 +17,7 @@ export class DataSendMessage {
 
 export interface UpdateStatusGameDto {
   gameDiceId: number;
+  diceDetailId: number;
   transaction: number;
   status: number;
   totalRed?: number;
