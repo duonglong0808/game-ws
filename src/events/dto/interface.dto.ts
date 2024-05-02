@@ -19,7 +19,7 @@ export interface UpdateStatusGameDto {
   gameDiceId: number;
   diceDetailId: number;
   transaction: number;
-  status: number;
+  status: number | string;
   totalRed?: number;
 }
 
