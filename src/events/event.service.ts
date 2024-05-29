@@ -93,7 +93,7 @@ export class EventService {
     // Kiểm tra dạng tin nhắn , kiểm tra room đã được lập chưa và join room
     const roomName = `room_game-${userId}`;
 
-    const keyPrefix = `dice-detail:`;
+    const keyPrefix = `${process.env.APP_NAME}:dice-detail:`;
     const keyRedis = await this.cacheService.scanKey(keyPrefix);
     const dataRedis = await Promise.all(keyRedis.map((key) => this.cacheService.get(key)));
     const dataDiceDetail = dataRedis.map((data, index) => {
