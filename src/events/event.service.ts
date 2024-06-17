@@ -62,7 +62,17 @@ export class EventService {
 
   getUserIdByTokenJwt(client: Socket) {
     const clineInfo = this.getClientInfo(client);
-    const access_token = clineInfo.token;
+    const access_token = clineInfo?.token;
+    if (!access_token) {
+      // Ping data user
+      client.emit(
+        'data',
+        this.bufferObject({
+          error: 'Missing access token',
+        }),
+      );
+      return false;
+    }
     const dataUser = this.parseJwt(access_token);
     const userId = dataUser.id;
     if (!userId) {
