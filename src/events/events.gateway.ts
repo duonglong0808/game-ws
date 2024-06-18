@@ -61,8 +61,8 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     const dataRes = this.bufferObject({
       typeEmit: TypeEmitMessage.updateStatusBaccarat,
       ...dto,
-      pokerBanker: dto.pokerBanker.split(','),
-      pokerPlayer: dto.pokerPlayer.split(','),
+      pokerBanker: dto.pokerBanker ? dto.pokerBanker.split(',') : '',
+      pokerPlayer: dto.pokerPlayer ? dto.pokerPlayer.split(',') : '',
     });
 
     this.server.emit('data', dataRes);
